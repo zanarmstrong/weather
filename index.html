@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="weatherHourly.css">
+</head>
+<body>
+    <select id="metric" name="Select Metric:">
+    <option value="cloudCover" selected>Percent Cloudy</option>
+    <option value="normalTemperature">Temperature</option>
+    <option value="heatIndex">Temperature with Heat Index</option>
+    <option value="windChill">Temp with Wind Chill</option>
+    <option value="aveWindSpeed">Ave Wind Speed</option>
+  </select>
+  <select id="colorSelector" name="Select Color or White:">
+    <option value="false" selected>White Lines</option>
+    <option value="true" >Colorful Lines, by month</option>
+  </select>
+  <p id="citySelection"></p>
+	<div id="instructions">
+		<p><span id="info">Click on the map to choose a city. There are 365 circles, one for each day of the year.  Each circle is actually a polygon with 24 corners, one for each hour of the day. The distance from the center to each corner represents the metric: the further away from the center the larger the metric.</span></p>
+		<p><span id="info">Data from <a href="https://gis.ncdc.noaa.gov/geoportal/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00824">NOAA</a></span></p>
+	</div>
+	<section id="weatherLines">
+		<p></p>
+	</section>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+  <script src="viz.js"></script>
+  <script src="state.js"></script>
+  <script src="data.js"></script>
+  <script src="selectionViz.js"></script>
+  <script src="clock.js"></script>
+  <script src="weatherHourly.js"></script>
+</body>
