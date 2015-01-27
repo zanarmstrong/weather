@@ -45,7 +45,6 @@ view.prototype.updateView = function(state, data) {
       .y(function(d,i){return yClockFunction(d,i, state.getScales())})
       .interpolate('linear');
 
-
    // line graph
   svg.selectAll('path')
     // need to improve this
