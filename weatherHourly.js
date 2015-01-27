@@ -76,6 +76,7 @@ d3.csv(dataFile, function(error, inputData) {
   if (error) return console.error(error);
 
   data.updateData(inputData, cState);
+  cState.updateHash();
 
   // draw lines 
   viz.setView(cState, data.getPathData(cState.getCity(), cState.getMetric()));
