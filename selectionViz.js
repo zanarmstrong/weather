@@ -14,8 +14,8 @@ setUpMap = function() {
 
   // defines size of map, and location on the screen
   var projection = d3.geo.albersUsa()
-    .translate([width + margin.left + 20, 55])
-    .scale([200]);
+    .translate([width + margin.left + 50, 80])
+    .scale([300]);
 
   var path = d3.geo.path().projection(projection);
 
