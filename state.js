@@ -1,5 +1,7 @@
 "use strict";
 
+var metrics = ["cloudCover", "normalTemperature", "heatIndex", "windChill", "aveWindSpeed"]
+
 function state(city, metric, yDomain, dimensions, colored) {
 	this.city = city;
 	this.metric = metric;
@@ -12,8 +14,13 @@ function state(city, metric, yDomain, dimensions, colored) {
       	  "#FFCBC5","#E6A29B", "#B9D6D3","#86ACA8","#608F8A"]}
 };
 
+state.prototype.updateHash = function() {
+	window.location.hash = "city=" + this.city + "&metric=" + this.metric + "&colored=" + this.colored;
+}
+
 state.prototype.setCity = function(city) {
 	this.city = city;
+	this.updateHash();
 };
 
 state.prototype.getCity = function() {
@@ -22,6 +29,8 @@ state.prototype.getCity = function() {
 
 state.prototype.setColor = function(bool) {
 	this.colored= bool;
+	this.updateHash();
+	document.getElementById("colorSelector").selectedIndex = bool;
 };
 
 state.prototype.getColor = function() {
@@ -31,6 +40,8 @@ state.prototype.getColor = function() {
 state.prototype.setMetric = function(metric) {
 	this.metric = metric;
 	this.scales.distance.domain(this.yDomain[this.metric]);
+	this.updateHash();
+	document.getElementById("metric").selectedIndex = metrics.indexOf(metric);
 };
 
 state.prototype.getMetric = function() {

@@ -1,8 +1,5 @@
 "use strict";
 
-// Data location
-var dataFile = "moreCities.csv";
-
 // STANDARD VARIABLES
 var margin = {
     top: 150,
@@ -13,13 +10,29 @@ var margin = {
   width = 2 * circleRadius + 300 - margin.left - margin.right,
   height = 900 - margin.top - margin.bottom;
 
+
 // initialize state
 var cState = new state('SAN FRANCISCO', 
                        "cloudCover", 
                        {normalTemperature: [-10,105], heatIndex: [-10,105], windChill: [-10,105], cloudCover: [0,100], aveWindSpeed: [0,25]},
                        {width: width, height: height}, 
-                       false);
+                       0);
 
+if(window.location.hash.split("&").length != 0){
+  var windowState = window.location.hash.split("&");
+  for(var i = 0; i < windowState.length; i++){
+    var k = windowState[i].replace('#','').split('=');
+    if(k[0] == "city"){
+      cState.setCity(k[1]);
+    } else if (k[0] == "metric"){
+      cState.setMetric(k[1]);
+    } else if (k[0] == "colored"){
+      cState.setColor(k[1]);
+    }
+  }
+}
+
+var dataFile = 'dataMunging/' + cState.getCity() + '.csv';
 
 // initialize data
 var data = new dataObj();
@@ -43,16 +56,14 @@ var viz = new view();
 // when metric changes, update data and view
 d3.select('#metric')
   .on("change", function() {
-    console.log(this.value)
     cState.setMetric(this.value);
     updateDataAndView();
   })
 
 d3.select('#colorSelector')
   .on("change", function() {
-    console.log(this.value)
     cState.setColor(this.value);
-    viz.updateColor(cState, data.pathData);
+    viz.updateColor(cState, data.getPathData(cState.getCity(), cState.getMetric()));
     svg.selectAll(".monthLegend").classed("hidden", this.value != "true")
   })
 
@@ -67,7 +78,7 @@ d3.csv(dataFile, function(error, inputData) {
   data.updateData(inputData, cState);
 
   // draw lines 
-  viz.setView(cState, data.pathData);
+  viz.setView(cState, data.getPathData(cState.getCity(), cState.getMetric()));
   drawMonthLegend(cState);
   setUpMap();
 
@@ -77,12 +88,19 @@ d3.csv(dataFile, function(error, inputData) {
 // update selected city
 function updateCity(city) {
     cState.setCity(city);
-    updateCities(city);
-    updateDataAndView();
+    dataFile = 'dataMunging/' + city + '.csv';
+    d3.csv(dataFile, function(error, inputData) {
+      if (error) return console.error(error);
+      // still can consolodate this
+      updateCities(city);
+      data.updateData(inputData, cState);
+      updateDataAndView();
+    }
+    )
 }
 
 // update data and view
 function updateDataAndView() {
   data.updateState(cState);
-  viz.updateView(cState, data.pathData);
+  viz.updateView(cState, data.getPathData(cState.getCity(), cState.getMetric()));
 }

@@ -7,39 +7,28 @@ function dataObj() {
 };
 
 dataObj.prototype.updateData = function(data, state) {
-  this.inputData = data;
-  self = this;
+  city = state.getCity();
+  if(this.inputData[city] == undefined){
+    this.inputData[city] = data;
+    this.pathData[city] = {"normalTemperature": [], "cloudCover": [], "heatIndex": [], "windChill": [], "aveWindSpeed": [] }
+  }
 
-  console.log(state)
-
-  for (var i = 0; i < 365; i++) {
-    this.pathData[i] = [];
-  };
-
-  this.inputData
-      .filter(function(d,i) {
-            if (d.city == state.getCity()) {
-                self.pathData[moment(d.day).dayOfYear() - 1][+d.hour] = d[state.getMetric()];
-                return d;
-            }});
+  this.updateState(state);
 }
 
 dataObj.prototype.updateState = function(state) {
   self = this;
+  city = state.getCity();
+  metric = state.getMetric();
 
-  console.log(state.getCity(), state, this.inputData)
-  for (var i = 0; i < 365; i++) {
-    this.pathData[i] = [];
-  };
-
-  this.inputData
-      .filter(function(d,i) {
-            if (d.city == state.getCity()) {
-                self.pathData[moment(d.day).dayOfYear() - 1][+d.hour] = d[state.getMetric()];
-                return d;
-            }});
-
-  console.log(this.pathData)
+  if(this.pathData[city][metric].length == 0){
+    for (var i = 0; i < 365; i++) {
+      this.pathData[city][metric][i] = [];
+    };
+  }
+  this.inputData[city].forEach(function(d,i){
+    self.pathData[city][metric][d.day - 1][+d.hour] = d[metric] / 10;
+  })
 
 }
 
@@ -47,6 +36,6 @@ dataObj.prototype.getInputData = function(){
   return this.inputData;
 }
 
-dataObj.prototype.getPathData = function(){
-  return this.pathData;
+dataObj.prototype.getPathData = function(city, metric){
+  return this.pathData[city][metric];
 }

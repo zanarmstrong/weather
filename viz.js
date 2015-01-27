@@ -32,7 +32,7 @@ view.prototype.setView = function(state, data) {
       return lineFunction(d) + "Z"
     })
     .attr("stroke", function(d, i) {
-      if(state.getColor() == true){
+      if(state.getColor() == 1){
         return state.getScales().color[Math.floor(i / 31)];
       } else {return "white"};
     })
@@ -45,7 +45,6 @@ view.prototype.updateView = function(state, data) {
       .y(function(d,i){return yClockFunction(d,i, state.getScales())})
       .interpolate('linear');
 
-      console.log("data 0", data[0])
 
    // line graph
   svg.selectAll('path')
@@ -64,7 +63,7 @@ view.prototype.updateColor = function(state, data) {
     // need to improve this
     .data(data)
     .attr("stroke", function(d, i) {
-      if(state.getColor() == "true"){
+      if(state.getColor() == 1){
         return state.getScales().color[Math.floor(i / 31)];
       } else {return "white"};
     });
@@ -72,7 +71,7 @@ view.prototype.updateColor = function(state, data) {
 };
 
 function drawMonthLegend(state) {
-  var monthLegend = svg.selectAll(".monthLegend")
+  var monthLegend = svg.append('g').selectAll(".monthLegend")
      .data([0,1,2,3,4,5,6,7,8,9,10,11])
      .enter();
 
