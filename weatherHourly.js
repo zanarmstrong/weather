@@ -90,6 +90,7 @@ d3.csv(dataFile, function(error, inputData) {
 function updateCity(city) {
     cState.setCity(city);
     dataFile = 'dataMunging/' + city + '.csv';
+    // todo: add if statement here
     d3.csv(dataFile, function(error, inputData) {
       if (error) return console.error(error);
       // still can consolodate this

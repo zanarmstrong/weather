@@ -123,14 +123,14 @@ var citiesData = [
       "longitude": -104.66694444444445
     }
   },
-  {
+ /* {
     "city": "AUSTIN",
     "country": "USA",
     "location": {
       "latitude": 30.194444444444446,
       "longitude": -97.66972222222223
     }
-  },
+  }, */
   {
     "city": "CHARLOTTE",
     "country": "USA",
@@ -194,7 +194,7 @@ var citiesData = [
       "latitude": 39.717222222222226,
       "longitude": -86.29416666666667
     }
-  },
+  },/*
   {
     "city": "JACKSONVILLE",
     "country": "USA",
@@ -202,7 +202,7 @@ var citiesData = [
       "latitude": 30.49388888888889,
       "longitude": -81.68777777777778
     }
-  },
+  },*/
   {
     "city": "LOS ANGELES",
     "country": "USA",
