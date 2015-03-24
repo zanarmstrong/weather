@@ -104,12 +104,16 @@ p {
 	width: auto;
 	height: auto;
 	padding: 5px 5px;
-	font-weight: 600;
+	font-weight: 400;
 	background-color: rgba(255, 255, 255, 0.6);
 	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 	pointer-events: none;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; /* future proofing */
 }
 #tooltip p {
 	margin: 0;
