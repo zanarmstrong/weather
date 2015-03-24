@@ -2,7 +2,7 @@
 
 // STANDARD VARIABLES
 var margin = {
-    top: 150,
+    top: 200,
     right: 250,
     bottom: 60,
     left: 40

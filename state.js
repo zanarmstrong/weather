@@ -35,6 +35,7 @@ state.prototype.updateHash = function() {
 state.prototype.setCity = function(city) {
 	this.city = city;
 	this.updateHash();
+	this.updateTitle();
 };
 
 state.prototype.getCity = function() {
@@ -56,7 +57,12 @@ state.prototype.setMetric = function(metric) {
 	this.scales.distance.domain(this.yDomain[this.metric]);
 	this.updateHash();
 	document.getElementById("metric").selectedIndex = metrics.indexOf(metric);
+	this.updateTitle();
 };
+
+state.prototype.updateTitle = function() {
+	document.getElementById("infoHeader").innerHTML = "Typical " + this.getTitle();
+}
 
 state.prototype.getMetric = function() {
 	return this.metric;
@@ -65,20 +71,21 @@ state.prototype.getMetric = function() {
 state.prototype.getScales = function(){
 	return this.scales;
 }
+
 state.prototype.getTitle = function(){
 	var metric = "";
 	if(this.metric == "normalTemperature"){
-		metric = "Normal Temperature";
+		metric = "Temperature";
 	} else if (this.metric == "cloudCover"){
-		metric = "Percent of Cloud Cover ";
+		metric = "Percent Cloudy";
 	} else if (this.metric == "heatIndex"){
-		metric = "Heat Index (what temperature it feels like due to humidity) ";
+		metric = "Heat Index";
 	} else if (this.metric == "windChill"){
-		metric = "Wind Chill (what temperature it feels like due to wind) ";
+		metric = "Wind Chill";
 	} else if (this.metric == "aveWindSpeed"){
-		metric = "Average Wind Speed ";
+		metric = "Average Wind Speed";
 	} 
-	return metric + " in " + this.city + " by hour of day, based on last 30 years";;
+	return metric + " in " + toNormalCase(this.getCity());
 }
 
 state.prototype.getMetricLegendText = function(){
@@ -107,4 +114,12 @@ state.prototype.getYText = function(){
 	} else {
 		return "";
 	}
+}
+
+function toNormalCase(string) {
+	var re = /\S+\s*/g;
+	var words = string.match(re);
+	var output = ""
+	words.forEach(function(d){output = output + d.charAt(0).toUpperCase() + d.slice(1).toLowerCase()})
+    return output
 }
