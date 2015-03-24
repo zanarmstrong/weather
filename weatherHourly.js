@@ -16,7 +16,7 @@ var cState = new state('SAN FRANCISCO',
                        "cloudCover", 
                        {normalTemperature: [-10,105], heatIndex: [-10,105], windChill: [-10,105], cloudCover: [0,100], aveWindSpeed: [0,25]},
                        {width: width, height: height}, 
-                       0);
+                       1);
 
 if(window.location.hash.split("&").length != 0){
   var windowState = window.location.hash.split("&");
@@ -45,11 +45,6 @@ var svg = d3.select('#weatherLines')
   .append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-
-//svg.append("circle").attr("r", 3).attr("cx", circleRadius).attr("cy", circleRadius).attr("fill", "#321C00");
-
-//svg.append("circle").attr("r", circleRadius).attr("cx", circleRadius).attr("cy", circleRadius).attr("stroke", "#321C00").attr("fill", "none");
-
 // initialize view
 var viz = new view();
 
@@ -62,9 +57,10 @@ d3.select('#metric')
 
 d3.select('#colorSelector')
   .on("change", function() {
+    console.log(this.value)
     cState.setColor(this.value);
     viz.updateColor(cState, data.getPathData(cState.getCity(), cState.getMetric()));
-    svg.selectAll(".monthLegend").classed("hidden", this.value != "true")
+    svg.selectAll(".monthLegend").classed("hidden", this.value != 1)
   })
 
 drawClock();

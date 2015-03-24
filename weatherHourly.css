@@ -1,5 +1,6 @@
 body {
 	background-color: #3F3F3F;
+	font-family: 'Raleway', sans-serif;
 }
 
 p {
@@ -23,16 +24,16 @@ p {
 
 #metric {
 		  position: absolute;
-		  top: 10px;
-		  left: 840px;
+		  top: 30px;
+		  left: 680px;
 		  width: auto;
 		  height: auto;
 }
 
 #colorSelector {
 		  position: absolute;
-		  top: 35px;
-		  left: 840px;
+		  top: 55px;
+		  left: 680px;
 		  width: auto;
 		  height: auto;
 }
@@ -41,21 +42,21 @@ p {
 		  position: absolute;
 		  top: 10px;
 		  left: 45px;
-		  width: 750px;
+		  width: 600px;
 		  height: auto;
-		  padding: 5px 10px;
-		  background-color: rgba(255, 255, 255, 0.7);
-		  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-		  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-		  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-		  pointer-events: none;
 }
 
 #instructions p {
-		  margin: 0;
-		  line-height: 20px;
-		  color: black;
-		  font-size: 14px;
+		  line-height: 12px;
+		  color: white;
+		  font-size: 26px;
+}
+
+#datasource {
+	font-style: italic;
+	position: absolute;
+	top: 850px;
+	left: 45px;
 }
 
 #citySelection {
@@ -78,4 +79,16 @@ p {
 .citiesForeground:hover {
 	stroke: #FF7F15;
   stroke-width: 8;
+}
+
+.monthLegend {
+	font-size: 16px;
+}
+
+.selectedMonth {
+	opacity: .5;
+}
+
+.unselectedMonth {
+	opacity: .02;
 }

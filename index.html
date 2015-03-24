@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
+  <title>Weather Patterns</title>
   <link rel="stylesheet" href="weatherHourly.css">
+  <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <select id="metric" name="Select Metric:">
@@ -17,11 +19,11 @@
   </select>
   <p id="citySelection"></p>
 	<div id="instructions">
-		<p><span id="info">There are 365 circles, one for each day of the year.  Each circle is actually a polygon with 24 corners, one for each hour of the day. The distance from the center to each corner represents some information about the weather, for example how cloudy it typically is on that hour and day in the particular city. Choose different cities and different metrics to explore.</span></p>
-		<p><span id="info">The data is based on the last 30 years of weather data, and comes from <a href="https://gis.ncdc.noaa.gov/geoportal/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00824">NOAA</a></span></p>
+		<p><span class="info">365 Curves: one for each day of the year.</span></p>
+    <p><span class="info">24 points per Curve: one for each hour of the day.</span></p>
 	</div>
 	<section id="weatherLines">
-		<p></p>
+  <p><span id="datasource">Data is based on the last 30 years of weather data, and comes from <a href="https://gis.ncdc.noaa.gov/geoportal/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00824">NOAA</a></span></p>
 	</section>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>

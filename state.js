@@ -8,11 +8,25 @@ function state(city, metric, yDomain, dimensions, colored) {
 	this.yDomain = yDomain;
 	this.dimensions = dimensions;
 	this.colored = colored;
+	this.selectedMonths = [];
 	this.scales = {distance: d3.scale.linear().domain(yDomain[this.metric]).range([0,circleRadius]),
           angle: d3.scale.linear().domain([0,24]).range([0,2*Math.PI]),
       	  color: ["#6C7C99","#919EB6","#C0C9DA", "#E6CC9B","#FFEBC5","#FFF3DD","#FFE0DD",
       	  "#FFCBC5","#E6A29B", "#B9D6D3","#86ACA8","#608F8A"]}
 };
+
+state.prototype.updateSelectedMonthsList = function(month) {
+	var index = this.selectedMonths.indexOf(month);
+	if(index == -1){
+		this.selectedMonths.push(month);
+	} else {
+		this.selectedMonths.splice(index, index + 1)
+	}
+}
+
+state.prototype.getSelectedMonths = function(){
+	return this.selectedMonths;
+}
 
 state.prototype.updateHash = function() {
 	window.location.hash = "city=" + this.city + "&metric=" + this.metric + "&colored=" + this.colored;
