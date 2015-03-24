@@ -23,7 +23,7 @@ if(window.location.hash.split("&").length != 0){
   for(var i = 0; i < windowState.length; i++){
     var k = windowState[i].replace('#','').split('=');
     if(k[0] == "city"){
-      cState.setCity(k[1]);
+      cState.setCity(k[1].replace(/%20/g, ' '););
     } else if (k[0] == "metric"){
       cState.setMetric(k[1]);
     } else if (k[0] == "colored"){
