@@ -30,12 +30,12 @@ state.prototype.getSelectedMonths = function(){
 
 state.prototype.updateHash = function() {
 	window.location.hash = "city=" + this.city + "&metric=" + this.metric + "&colored=" + this.colored;
+	this.updateTitle();
 }
 
 state.prototype.setCity = function(city) {
 	this.city = city;
 	this.updateHash();
-	this.updateTitle();
 };
 
 state.prototype.getCity = function() {
@@ -57,7 +57,6 @@ state.prototype.setMetric = function(metric) {
 	this.scales.distance.domain(this.yDomain[this.metric]);
 	this.updateHash();
 	document.getElementById("metric").selectedIndex = metrics.indexOf(metric);
-	this.updateTitle();
 };
 
 state.prototype.updateTitle = function() {
