@@ -81,6 +81,22 @@ state.prototype.getTitle = function(){
 	return metric + " in " + this.city + " by hour of day, based on last 30 years";;
 }
 
+state.prototype.getMetricLegendText = function(){
+	var metricText = "";
+	if(this.metric == "normalTemperature"){
+		metricText = "°F";
+	} else if (this.metric == "cloudCover"){
+		metricText = "% Cloudy";
+	} else if (this.metric == "heatIndex"){
+		metricText = "°F";
+	} else if (this.metric == "windChill"){
+		metricText = "°F";
+	} else if (this.metric == "aveWindSpeed"){
+		metricText = "mph";
+	} 
+	return metricText;
+}
+
 state.prototype.getYText = function(){
 	if(["normalTemperature", "heatIndex", "windChill"].indexOf(this.metric) != -1){
 		return "°F";
